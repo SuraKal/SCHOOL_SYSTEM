@@ -86,9 +86,9 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Manage Attendance</h6>
             <a class="collapse-item" href="viewAttendance.php">View Class Attendance</a>
-            <a class="collapse-item" href="downloadRecord.php">Today's Report (xls)</a>
+            <!-- <a class="collapse-item" href="downloadRecord.php">Today's Report (xls)</a>
             <a class="collapse-item" href="downloadRecordWeekly.php">This week Report (xls)</a>
-            <a class="collapse-item" href="downloadRecordMontly.php">This month Report (xls)</a>
+            <a class="collapse-item" href="downloadRecordMontly.php">This month Report (xls)</a> -->
           </div>
         </div>
       </li>
@@ -130,7 +130,7 @@
           </div>
         </div>
       </li>
-      <hr class="sidebar-divider">
+      <!-- <hr class="sidebar-divider">
       <div class="sidebar-heading">
       Organization details
       </div>
@@ -147,10 +147,8 @@
             <a class="collapse-item" href="organizationInfo.php">Org Info</a>
           </div>
         </div>
-        <!-- <div id="collapseBootstrapcon5" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-          
-        </div> -->
-      </li>
+
+      </li> -->
 
 
 </ul>

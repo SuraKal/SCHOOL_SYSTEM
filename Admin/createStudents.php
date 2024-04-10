@@ -378,8 +378,8 @@ require_once ('../Includes/init.php');
                             <th>Date registered</th>
                             <th>Edit</th>
                             <th>Delete</th>
-                            <th>Generate ID</th>
-                            <th>Generate Certeficate</th>
+                            <!-- <th>Generate ID</th>
+                            <th>Generate Certeficate</th> -->
                           </tr>
                         </thead>
                         <tbody>
@@ -404,15 +404,15 @@ require_once ('../Includes/init.php');
                                     $y = '../ID Cards/'.$rows['firstName'].' '.$rows['lastName'].'_'.$rows['className'].'.pdf';
                                     $z = '../Certeficate/'.$rows['firstName'].' '.$rows['lastName'].'-'.$rows['className'].'.pdf';
 
-                                    $downloadCerteficate = 'Not found';
-                                    $downloadIdCard = 'No Id'; //if file is not found for Id Card 
-                                    if (file_exists($y) && $rows['email'] != ' ') { //if file path is found
-                                          $downloadIdCard = "<a href='../Downloads/downloadID.php?file_path=".urlencode($y)."&studentName=".$rows['firstName']."&studentEmail=".$rows['email']."'><i class='fas fa-fw fa-download'></i></a>";
-                                    } //we are sending request for downloadID.php to download the ID card and also send it to the student.
+                                    // $downloadCerteficate = 'Not found';
+                                    // $downloadIdCard = 'No Id'; //if file is not found for Id Card 
+                                    // if (file_exists($y) && $rows['email'] != ' ') { //if file path is found
+                                    //       $downloadIdCard = "<a href='../Downloads/downloadID.php?file_path=".urlencode($y)."&studentName=".$rows['firstName']."&studentEmail=".$rows['email']."'><i class='fas fa-fw fa-download'></i></a>";
+                                    // } //we are sending request for downloadID.php to download the ID card and also send it to the student.
                                     
-                                    if (extension_loaded('gd')) {
-                                      $downloadCerteficate = "<a href='#' onclick='generateCerteficate(".$x.", \"".$z."\")'><i class='fas fa-fw fa-download'></i></a>"; //Id card is generated when registreting student
-                                    }
+                                    // if (extension_loaded('gd')) {
+                                    //   $downloadCerteficate = "<a href='#' onclick='generateCerteficate(".$x.", \"".$z."\")'><i class='fas fa-fw fa-download'></i></a>"; //Id card is generated when registreting student
+                                    // }
                                     $sn = $sn + 1;
                                     echo"
                                       <tr>
@@ -425,6 +425,7 @@ require_once ('../Includes/init.php');
                                         <td>".$rows['className']."</td>
                                         <td>".$rows['classArmName']."</td>
                                         <td>".$rows['dateCreated']."</td>
+                                      
                                         <td><a href='?action=edit&Id=".$rows['Id']."'><i class='fas fa-fw fa-edit'></i></a></td>
                                         <td><a href='?action=delete&Id=".$rows['Id']."'><i class='fas fa-fw fa-trash'></i></a></td>
 

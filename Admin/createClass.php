@@ -56,26 +56,25 @@ require_once ('../Includes/init.php');
       }
     
   }
+
   //------------------------End SAVE--------------------------------------------------
   //--------------------EDIT class created ------------------------------------------------------------
 if (isset($_GET['Id']) && isset($_GET['action']) && $_GET['action'] == "edit") 
 {
-
   $Id = $_GET['Id'];
-  $classInfo = classInfo($Id);
+  $classInfo = classInfoName($Id);
   // print("<pre>");
   // print_r($classInfo);
   // // ------------UPDATE--------------//
   if (isset($_POST['update'])) {
-                if (isset($_POST['className'])) {
-                  $className = $_POST['className'];
-                }
-
-                if (!empty($className)) { // Use "&&" instead of "||"
-                    // Call the function or perform the necessary update logic here
-                    editClass($Id, $className);
-                    // echo "Got until here";
-                }
+    if (isset($_POST['className'])) {
+      $className = $_POST['className'];
+    }
+    if (!empty($className)) { // Use "&&" instead of "||"
+        // Call the function or perform the necessary update logic here
+        editClass($Id, $className);
+        // echo "Got until here";
+    }
   }
 } 
   //-------------------------------End EDIT------------------------------------------------------------

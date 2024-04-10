@@ -421,47 +421,63 @@ function classInfo($classId){
     }
     return $fetch_data;
 }
+function classInfoName($classId){
+    global $conn;
+    $classId = input_cleaner($classId);
+    $fetch_data = array();
+    $select_detail = "SELECT className FROM tblclass WHERE Id = '$classId'";
+    $query = mysqli_query($conn, $select_detail);
+    if($query){
+        while($row = mysqli_fetch_assoc($query)){
+            $fetch_data= $row; //This will return as an assocative array
+        }
+    }
+    return $fetch_data;
+}
 
 function registerClass($className)
 {
     global $conn;
+    $className = input_cleaner($className);
     // Prepare the SELECT query
-    $selectQuery = 'SELECT * FROM tblclass WHERE className = ?';
+    $selectQuery = 'SELECT Id FROM tblclass WHERE className = ?';
     $stmt = $conn->prepare($selectQuery);
     $stmt->bind_param('s', $className);
     $stmt->execute();
     $result = $stmt->get_result();
-
     // Check if the class name already exists
     if ($result->num_rows > 0) {
         $_SESSION['exists'] = 'Class alredy exists';
         header('Location: createClass.php');
         exit;
+    }else{
+        // Prepare the INSERT query
+        $insertQuery = 'INSERT INTO tblclass (className) VALUES (?)';
+        $stmt = $conn->prepare($insertQuery);
+        $stmt->bind_param('s', $className);
+        $stmt->execute();
+        // Check if the class was successfully registered
+        if ($stmt->affected_rows === 1) {
+            $_SESSION['success'] = 'Class successfully registered';
+            header('Location: createClass.php');
+            exit;
+        } else {
+            $_SESSION['error'] = 'Failed to register class';
+            header('Location: createClass.php');
+            exit;
+        }
     }
-
-    // Prepare the INSERT query
-    $insertQuery = 'INSERT INTO tblclass (className) VALUES (?)';
-    $stmt = $conn->prepare($insertQuery);
-    $stmt->bind_param('s', $className);
-    $stmt->execute();
-
-    // Check if the class was successfully registered
-    if ($stmt->affected_rows === 1) {
-        $_SESSION['success'] = 'Class successfully registered';
-        header('Location: createClass.php');
-        exit;
-    } else {
-        $_SESSION['error'] = 'Failed to register class';
-        header('Location: createClass.php');
-        exit;
-    }
+    
 }
+
 
 function editClass($Id, $className){
 
     global $conn;
+    $className = input_cleaner($className);
+    $Id = input_cleaner($Id);
     try {
-        $checkQuery = "SELECT * from tblclass where className = ? AND Id <> ?";
+        $checkQuery = "SELECT Id from tblclass where className = ? AND Id <> ?";
         $stmt = $conn->prepare($checkQuery);
         $stmt->bind_param('ss', $className, $Id);
         $stmt->execute();
@@ -490,17 +506,17 @@ function editClass($Id, $className){
 
         }
     }catch (Exception $e) { //If there is any error 
-                    // Handle the exception/error here
-                        $_SESSION['errorUpdate'] = "Error: " . $e->getMessage(); //shows error effectivly 
-                        echo "<script type=\"text/javascript\">
-                                window.location = \"createClass.php\";
-                            </script>";
-                } 
+        // Handle the exception/error here
+        $_SESSION['errorUpdate'] = "Error: " . $e->getMessage(); //shows error effectivly 
+        header('Location: createClass.php');
+        exit;
+    } 
 }
 
 function deleteClass($Id)
 {
     global $conn;
+    $Id = input_cleaner($Id);
     $queryDelete = "DELETE FROM tblclass WHERE Id=?"; // Deleting class based on the Id selected(row selected)
     $stmt = $conn->prepare($queryDelete);
     $stmt->bind_param('s', $Id);
@@ -887,8 +903,9 @@ function takeAttendance($studentAddmission_Number, $classId, $classArmId, $statu
         }
     catch (Exception $e) { //If there is any error 
                 // Handle the exception/error here
-                    $_SESSION['fail'] = "Error";
-                    header('Location: createClass.php');
+                    // $_SESSION['fail'] = "Error";
+                    $_SESSION['fail'] = $e->getMessage();
+                    header('Location: takeAttendance.php');
                     // exit;
             }
 

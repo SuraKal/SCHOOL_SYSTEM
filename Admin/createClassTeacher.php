@@ -341,10 +341,15 @@ if(isset($_POST['save'])){
                                 echo ' <select required name="classId" onchange="classArmDropdown(this.value)" class="form-control mb-3">';
                                 echo'<option value="">--Select Class--</option>';
                                 while ($rows = $result->fetch_assoc()){
-                                echo'<option value="'.$rows['Id'].'" >'.$rows['className'].'</option>';
-                                    }
-                                        echo '</select>';
-                                    }
+
+                                  // if($_GET['action'] == 'edit' && $row['classId'] == $rows['Id']){
+                                  //   echo'<option value="'.$rows['Id'].'" selected>'.$rows['className'].'</option>';
+                                  // }
+
+                                  echo'<option value="'.$rows['Id'].'" >'.$rows['className'].'</option>';
+                                      }
+                                          echo '</select>';
+                                      }
                                   ?>  
                               </div>
                         <!-- Select the batch the teacher teaches -->
@@ -391,13 +396,14 @@ if(isset($_POST['save'])){
                       <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                         <thead class="thead-light">
                           <tr>
-                            <th>#</th>
+                            <!-- <th>#</th> -->
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email Address</th>
                             <th>Phone No</th>
-                            <th>Class</th>
-                            <th>Add</th>
+                            <!-- <th>Class</th> -->
+                            <!-- <th>Add</th> -->
+                            <!-- <th >Date registered</th> -->
                             <th>Date registered</th>
                             <th>Edit</th>
                             <th>Delete</th>
@@ -422,13 +428,13 @@ if(isset($_POST['save'])){
                                     $get_batch = teacherAssign($rows['Id']); //check if any of batch is assigned to that teacher
                                     if(empty($get_batch)){
                                       //If the teacher has no class we will show it a button to add class 
-                                      $batch = "<a href='?action=add&Id=".$rows['Id']."' class='btn-primary text-white p-1 px-2'>Add</a>";
+                                      $batch = "<a href='?action=add&Id=".$rows['Id']."' class='btn-primary text-white p-1 px-2 d-none'>Add</a>";
                                     }else{
-                                      $batch = "<a href='#model_3' class='btn-primary text-white p-1 px-2 link'>View</a>";
+                                      $batch = "<a href='#model_3' class='btn-primary text-white p-1 px-2 link d-none'>View</a>";
                                       // print("<pre>");
                                       // print_r($batch);
                                       // To display the batch 
-                                      $class = '<div id="model_3" class="popup-modal slider mfp-hide">
+                                      $class = '<div id="model_3" class="popup-modal slider mfp-hide d-none">
                                                   <p class="close"><i class="fa fa-window-close text-danger" aria-hidden="true"></i></p>
                                                   <div class="media">
                                                     <!-- <img src="./images/portfolio/Apple Bootstrap1.jpg" alt="" /> -->
@@ -440,14 +446,16 @@ if(isset($_POST['save'])){
                                                     <tr>
                                                       <th>No</th>
                                                       <th>Class</th>
-                                                      <th>Batch</th>
+                                                      <th class="d-none">Batch</th>
                                                     </tr>';
                                     $classArm = $rows['classArmId'];
                                 $delimiter = ',';
                                 $classArmId = explode($delimiter, $classArm);
                                 $sn = 0;
                                 foreach($classArmId as $classArm){
+                                  
                                   if(!empty(getClassArm($classArm))){
+                                    
                                       $sn = $sn + 1;
                                       $batchInfo = getClassArm($classArm);
                                       $batchName = $batchInfo['classArmName']; //get class arm name 
@@ -475,13 +483,12 @@ if(isset($_POST['save'])){
                                     $sn = $sn + 1;
                                     echo"
                                       <tr>
-                                        <td>".$sn."</td>
                                         <td>".$rows['firstName']."</td>
                                         <td>".$rows['lastName']."</td>
                                         <td>".$rows['emailAddress']."</td>
                                         <td>".$rows['phoneNo']."</td>
-                                        <td>".$batch. $class."</td>
-                                        <td><a href='?action=add&Id=".$rows['Id']."'><i class='fa fa-plus-square' aria-hidden='true'></i></a></td>
+                                        <td class='d-none'>".$batch. $class."</td>
+                                        
 
                                         <td>".$rows['dateCreated']."</td>
                                         <td><a href='?action=edit&Id=".$rows['Id']."'><i class='fas fa-fw fa-edit'></i></a></td>
@@ -490,6 +497,7 @@ if(isset($_POST['save'])){
                                       </tr>";
                                   }
                               }
+                              // <td><a href='?action=add&Id=".$rows['Id']."'><i class='fa fa-plus-square' aria-hidden='true'></i></a></td>
                               else
                               {
                                   echo   

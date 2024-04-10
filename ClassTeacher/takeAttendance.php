@@ -20,8 +20,9 @@ if(isset($_SESSION['tryAgain'])){
   unset($_SESSION['tryAgain']);
 }
 if(isset($_SESSION['fail'])){
-  $statusMsg = "<div class='alert alert-danger w-50'  id='status_message'>Please Try again later!</div>"; //If this happens check the function takeAttendance
-  unset($_SESSION['fail']);
+  // $statusMsg = "<div class='alert alert-danger w-50'  id='status_message'>Please Try again later!</div>"; //If this happens check the function takeAttendance
+  $statusMsg = $_SESSION['fail']; //If this happens check the function takeAttendance
+  // unset($_SESSION['fail']);
 }
 
     // $query = "SELECT tblclass.className,tblclassarms.classArmName 

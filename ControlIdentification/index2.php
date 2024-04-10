@@ -44,10 +44,10 @@ if (isset($_GET['Id'])) {
         $centerX = (imagesx($image) - $textWidth) / 2;
         // Add the text with center alignment
         imagettftext($image, 60, 0, $centerX, 1985, $color, $Coursefont, $course);
-
+// 1214
       //Date
 
-    $Date = date('Y-m-d');
+      $Date = '2023-Aug-09';
     imagettftext($image, 59, 0, 1785, 2200, $color, $font, $Date);
 
       //JPEG

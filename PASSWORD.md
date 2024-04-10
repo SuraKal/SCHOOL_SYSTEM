@@ -6,6 +6,9 @@ Password: Ennliteadmin
 Email : EnnliteSub@gmail.com
 Password:EnnliteSub
 
-**Teacher Login Details** 
-Email : eden68@gmail.com
-Password : eden68
+**Teacher Login Details**
+Email : hana68@gmail.com
+Password : hana68
+
+**Student login Details**
+Admission number : PE/681/24

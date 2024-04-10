@@ -4,6 +4,7 @@ include '../Includes/dbcon.php';
 include '../Includes/session.php';
 
 ?>
+
         <table border="1">
         <thead>
             <tr>

@@ -76,7 +76,7 @@ session_start();
                                             // $password = hash('sha256', $password); //hash it later
                                             //If user is the admin
                                             if($userType == "Administrator"){
-                                                $password = hash('sha256', $password);
+                                                // $password = hash('sha256', $password);
                                                 $query = "SELECT * FROM tbladmin WHERE emailAddress = '$username' AND password = '$password'";
                                                 $rs = $conn->query($query);
                                                 $num = $rs->num_rows;

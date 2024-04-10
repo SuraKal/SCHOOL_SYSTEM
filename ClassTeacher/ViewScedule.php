@@ -464,8 +464,8 @@ if (isset($_POST['save'])) {
                         <th>Starts at</th>
                         <th>Ends at</th>
                         <th>Detail</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <!-- <th>Edit</th> -->
+                        <!-- <th>Delete</th> -->
                         <th>Download</th>
                         
                       </tr>
@@ -508,8 +508,8 @@ if (isset($_POST['save'])) {
                                                       <td>".$rows['timeFrom']."</td>
                                                       <td>".$rows['timeTo']."</td>
                                                       <td><a href='scheduleDetail.php?Id=".$rows['Id']."&link=".$current_page."' class='btn-primary p-1 text-decoration-none'>View</a></td>
-                                                      <td><a href='?action=edit&Id=".$rows['Id']."'><i class='fas fa-fw fa-edit'></i></a></td>
-                                                      <td><a href='?action=delete&Id=".$rows['Id']."&Doc=".$rows['Doc']."'><i class='fas fa-fw fa-trash'></i></a></td>
+                                                      <td class='d-none'><a href='?action=edit&Id=".$rows['Id']."'><i class='fas fa-fw fa-edit '></i></a></td>
+                                                      <td class='d-none'><a href='?action=delete&Id=".$rows['Id']."&Doc=".$rows['Doc']."'><i class='fas fa-fw fa-trash '></i></a></td>
                                                       <td>";
                                                       // Check if the Doc file exists
                                                           if (file_exists($rows['Doc'])) {
